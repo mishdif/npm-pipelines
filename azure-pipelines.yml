@@ -10,6 +10,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+# - task: Npm@1
+#   inputs:
+#     command: 'install'
+#   displayName: 'npm install'
+
+# - task: Npm@1
+#   inputs:
+#     command: 'custom'
+#     customCommand: 'install Cypress'
+#   displayName: 'npm install Cypress'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run cy:report'
+  displayName: 'npm run cypress tests'
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
@@ -35,3 +50,8 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     publishLocation: 'pipeline'
   displayName: 'Publish npm artifact'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'install cypress'
