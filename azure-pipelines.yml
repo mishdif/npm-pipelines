@@ -10,48 +10,50 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-# - task: Npm@1
-#   inputs:
-#     command: 'install'
-#   displayName: 'npm install'
+- task: Npm@1
+  inputs:
+    command: 'install'
+  displayName: 'npm install'
 
-# - task: Npm@1
-#   inputs:
-#     command: 'custom'
-#     customCommand: 'install Cypress'
-#   displayName: 'npm install Cypress'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'install Cypress'
+  displayName: 'npm install Cypress'
+
 - task: Npm@1
   inputs:
     command: 'custom'
     customCommand: 'run cy:report'
   displayName: 'npm run cypress tests'
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '10.x'
+#   displayName: 'Install Node.js'
 
-- task: CopyFiles@2
-  inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
-    contents: |
-       src/*
-       public/*
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Copy project files'
+# - script: |
+#     npm install
+#     npm run build
+#   displayName: 'npm install and build'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    artifactName: e2e-server
-    targetPath: '$(Build.ArtifactStagingDirectory)'
-    publishLocation: 'pipeline'
-  displayName: 'Publish npm artifact'
+# - task: CopyFiles@2
+#   inputs:
+#     sourceFolder: '$(Build.SourcesDirectory)'
+#     contents: |
+#        src/*
+#        public/*
+#     targetFolder: '$(Build.ArtifactStagingDirectory)'
+#   displayName: 'Copy project files'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'install cypress'
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     artifactName: e2e-server
+#     targetPath: '$(Build.ArtifactStagingDirectory)'
+#     publishLocation: 'pipeline'
+#   displayName: 'Publish npm artifact'
+
+# - task: Npm@1
+#   inputs:
+#     command: 'custom'
+#     customCommand: 'install cypress'
