@@ -8,7 +8,7 @@ describe('Check content in Testkube.io', function(){
   })
   
   it('Check section copy', function(){
-    cy.contains('Ese);
+    cy.contains('Ese');
   })
 
 
